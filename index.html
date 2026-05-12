@@ -753,7 +753,6 @@
   <span class="k">"ok"</span>: <span class="n">true</span>,
   <span class="k">"deviceId"</span>: <span class="s">"DMX-CTRL-A4F2"</span>,
   <span class="k">"firmwareVersion"</span>: <span class="s">"2.1.0"</span>,
-  <span class="k">"rdmSupported"</span>: <span class="n">true</span>,
   <span class="k">"uptimeSeconds"</span>: <span class="n">3600</span>
 }
 
@@ -788,7 +787,6 @@ Authorization: Bearer &lt;user-secret&gt;</div>
   <span class="k">"deviceId"</span>: <span class="s">"DMX-CTRL-A4F2"</span>,
   <span class="k">"controllerName"</span>: <span class="s">"Stage Left"</span>,
   <span class="k">"firmwareVersion"</span>: <span class="s">"2.1.0"</span>,
-  <span class="k">"rdmSupported"</span>: <span class="n">true</span>,
   <span class="k">"uptimeSeconds"</span>: <span class="n">7200</span>,
   <span class="k">"wifi"</span>: {
     <span class="k">"ssid"</span>: <span class="s">"VenueWiFi_5G"</span>,
@@ -1078,18 +1076,14 @@ Authorization: Bearer &lt;user-secret&gt;
       <span class="k">"uid"</span>: <span class="s">"06AE:00000001"</span>,
       <span class="k">"modelId"</span>: <span class="s">"m26"</span>,      <span class="c">// app resolves this to channel map</span>
       <span class="k">"dmxAddress"</span>: <span class="n">1</span>,
-      <span class="k">"channelCount"</span>: <span class="n">8</span>,
-      <span class="k">"sceneId"</span>: <span class="n">null</span>,
-      <span class="k">"effectId"</span>: <span class="n">null</span>
+      <span class="k">"channelCount"</span>: <span class="n">8</span>
     }
   ],
   <span class="k">"groups"</span>: [
     {
       <span class="k">"id"</span>: <span class="s">"g1"</span>,
       <span class="k">"name"</span>: <span class="s">"Stage Left"</span>,
-      <span class="k">"deviceIds"</span>: [<span class="s">"d1"</span>, <span class="s">"d2"</span>],
-      <span class="k">"sceneId"</span>: <span class="s">"sc1"</span>,
-      <span class="k">"effectId"</span>: <span class="n">null</span>
+      <span class="k">"deviceIds"</span>: [<span class="s">"d1"</span>, <span class="s">"d2"</span>]
     }
   ],
   <span class="k">"scenes"</span>: [
@@ -1100,12 +1094,17 @@ Authorization: Bearer &lt;user-secret&gt;
         {
           <span class="k">"type"</span>: <span class="s">"device"</span>,
           <span class="k">"id"</span>: <span class="s">"d1"</span>,
-          <span class="k">"values"</span>: { <span class="k">"1"</span>: <span class="n">200</span>, <span class="k">"2"</span>: <span class="n">180</span> }
+          <span class="k">"values"</span>: {
+            <span class="k">"dimmer"</span>: <span class="n">255</span>,
+            <span class="k">"red"</span>: <span class="n">200</span>
+          }
         },
         {
           <span class="k">"type"</span>: <span class="s">"group"</span>,
           <span class="k">"id"</span>: <span class="s">"g1"</span>,
-          <span class="k">"values"</span>: { <span class="k">"1"</span>: <span class="n">150</span> }
+          <span class="k">"values"</span>: {
+            <span class="k">"dimmer"</span>: <span class="n">150</span>
+          }
         }
       ]
     }
@@ -1145,8 +1144,8 @@ Authorization: Bearer &lt;user-secret&gt;
         <div class="api-body">
           <div class="code-block"><span class="c">// 200 OK</span>
 { <span class="k">"devices"</span>: [
-  { <span class="k">"id"</span>: <span class="s">"d1"</span>, <span class="k">"name"</span>: <span class="s">"Spot 1"</span>, <span class="k">"uid"</span>: <span class="s">"06AE:00000001"</span>, <span class="k">"modelId"</span>: <span class="s">"m26"</span>, <span class="k">"dmxAddress"</span>: <span class="n">1</span>, <span class="k">"channelCount"</span>: <span class="n">8</span>, <span class="k">"sceneId"</span>: <span class="n">null</span>, <span class="k">"effectId"</span>: <span class="n">null</span> },
-  { <span class="k">"id"</span>: <span class="s">"d2"</span>, <span class="k">"name"</span>: <span class="s">"Wash 1"</span>, <span class="k">"uid"</span>: <span class="n">null</span>, <span class="k">"modelId"</span>: <span class="s">"m12"</span>, <span class="k">"dmxAddress"</span>: <span class="n">9</span>, <span class="k">"channelCount"</span>: <span class="n">2</span>, <span class="k">"sceneId"</span>: <span class="n">null</span>, <span class="k">"effectId"</span>: <span class="n">null</span> }
+  { <span class="k">"id"</span>: <span class="s">"d1"</span>, <span class="k">"name"</span>: <span class="s">"Spot 1"</span>, <span class="k">"uid"</span>: <span class="s">"06AE:00000001"</span>, <span class="k">"modelId"</span>: <span class="s">"m26"</span>, <span class="k">"dmxAddress"</span>: <span class="n">1</span>, <span class="k">"channelCount"</span>: <span class="n">8</span> },
+  { <span class="k">"id"</span>: <span class="s">"d2"</span>, <span class="k">"name"</span>: <span class="s">"Wash 1"</span>, <span class="k">"uid"</span>: <span class="n">null</span>, <span class="k">"modelId"</span>: <span class="s">"m12"</span>, <span class="k">"dmxAddress"</span>: <span class="n">9</span>, <span class="k">"channelCount"</span>: <span class="n">2</span> }
 ] }</div>
         </div>
       </div>
@@ -1204,9 +1203,7 @@ Authorization: Bearer &lt;user-secret&gt;
   <span class="k">"uid"</span>: <span class="s">"06AE:00000002"</span>,
   <span class="k">"modelId"</span>: <span class="s">"m27"</span>,
   <span class="k">"dmxAddress"</span>: <span class="n">17</span>,
-  <span class="k">"channelCount"</span>: <span class="n">8</span>,
-  <span class="k">"sceneId"</span>: <span class="s">"sc1"</span>,  <span class="c">// optional: assign scene</span>
-  <span class="k">"effectId"</span>: <span class="n">null</span>   <span class="c">// only one of sceneId/effectId</span>
+  <span class="k">"channelCount"</span>: <span class="n">8</span>
 }</div>
             </div>
             <div>
@@ -1215,9 +1212,7 @@ Authorization: Bearer &lt;user-secret&gt;
 { <span class="k">"id"</span>: <span class="s">"d3"</span>, <span class="k">"name"</span>: <span class="s">"Spot 2 Renamed"</span>,
   <span class="k">"uid"</span>: <span class="s">"06AE:00000002"</span>,
   <span class="k">"modelId"</span>: <span class="s">"m27"</span>, <span class="k">"dmxAddress"</span>: <span class="n">17</span>,
-  <span class="k">"channelCount"</span>: <span class="n">8</span>,
-  <span class="k">"sceneId"</span>: <span class="s">"sc1"</span>,
-  <span class="k">"effectId"</span>: <span class="n">null</span> }
+  <span class="k">"channelCount"</span>: <span class="n">8</span> }
 
 <span class="c">// 404</span>
 { <span class="k">"error"</span>: <span class="s">"device_not_found"</span> }
@@ -1270,9 +1265,7 @@ Authorization: Bearer &lt;user-secret&gt;
 { <span class="k">"groups"</span>: [
   {
     <span class="k">"id"</span>: <span class="s">"g1"</span>, <span class="k">"name"</span>: <span class="s">"Stage Left"</span>,
-    <span class="k">"deviceIds"</span>: [<span class="s">"d1"</span>, <span class="s">"d2"</span>],
-    <span class="k">"sceneId"</span>: <span class="s">"sc1"</span>,
-    <span class="k">"effectId"</span>: <span class="n">null</span>
+    <span class="k">"deviceIds"</span>: [<span class="s">"d1"</span>, <span class="s">"d2"</span>]
   }
 ] }</div>
         </div>
@@ -1291,18 +1284,14 @@ Authorization: Bearer &lt;user-secret&gt;
               <div class="body-label">Request payload</div>
               <div class="code-block">{
   <span class="k">"name"</span>: <span class="s">"Front Wash"</span>,
-  <span class="k">"deviceIds"</span>: [<span class="s">"d1"</span>,<span class="s">"d2"</span>,<span class="s">"d3"</span>],
-  <span class="k">"sceneId"</span>: <span class="s">"sc1"</span>,  <span class="c">// optional</span>
-  <span class="k">"effectId"</span>: <span class="n">null</span>   <span class="c">// only one of sceneId/effectId</span>
+  <span class="k">"deviceIds"</span>: [<span class="s">"d1"</span>,<span class="s">"d2"</span>,<span class="s">"d3"</span>]
 }</div>
             </div>
             <div>
               <div class="body-label">Responses</div>
               <div class="code-block"><span class="c">// 201 Created</span>
 { <span class="k">"id"</span>: <span class="s">"g2"</span>, <span class="k">"name"</span>: <span class="s">"Front Wash"</span>,
-  <span class="k">"deviceIds"</span>: [<span class="s">"d1"</span>,<span class="s">"d2"</span>,<span class="s">"d3"</span>],
-  <span class="k">"sceneId"</span>: <span class="s">"sc1"</span>,
-  <span class="k">"effectId"</span>: <span class="n">null</span> }
+  <span class="k">"deviceIds"</span>: [<span class="s">"d1"</span>,<span class="s">"d2"</span>,<span class="s">"d3"</span>] }
           </div>
         </div>
       </div>
@@ -1321,18 +1310,14 @@ Authorization: Bearer &lt;user-secret&gt;
               <div class="body-label">Request payload (all optional)</div>
               <div class="code-block">{
   <span class="k">"name"</span>: <span class="s">"Front Wash v2"</span>,
-  <span class="k">"deviceIds"</span>: [<span class="s">"d1"</span>,<span class="s">"d4"</span>],
-  <span class="k">"sceneId"</span>: <span class="n">null</span>,
-  <span class="k">"effectId"</span>: <span class="s">"ef1"</span>
+  <span class="k">"deviceIds"</span>: [<span class="s">"d1"</span>,<span class="s">"d4"</span>]
 }</div>
             </div>
             <div>
               <div class="body-label">Responses</div>
               <div class="code-block"><span class="c">// 200 OK</span>
 { <span class="k">"id"</span>: <span class="s">"g2"</span>, <span class="k">"name"</span>: <span class="s">"Front Wash v2"</span>,
-  <span class="k">"deviceIds"</span>: [<span class="s">"d1"</span>,<span class="s">"d4"</span>],
-  <span class="k">"sceneId"</span>: <span class="n">null</span>,
-  <span class="k">"effectId"</span>: <span class="s">"ef1"</span> }
+  <span class="k">"deviceIds"</span>: [<span class="s">"d1"</span>,<span class="s">"d4"</span>] }
 
 <span class="c">// 404</span>
 { <span class="k">"error"</span>: <span class="s">"group_not_found"</span> }</div>
@@ -1482,6 +1467,34 @@ Authorization: Bearer &lt;user-secret&gt;
 { <span class="k">"error"</span>: <span class="s">"scene_not_found"</span> }</div>
         </div>
       </div>
+
+      <!-- APPLY SCENE -->
+      <div class="api-card" id="card-sc-apply">
+        <div class="api-header" onclick="toggleCard('card-sc-apply')">
+          <span class="method-badge POST">POST</span>
+          <span class="api-endpoint">/api/scenes/<span class="path-param">{id}</span>/apply</span>
+          <span class="api-desc">Recall and apply a saved scene snapshot</span>
+          <span class="api-chevron">▶</span>
+        </div>
+        <div class="api-body">
+          <div class="body-cols">
+            <div>
+              <div class="body-label">Request</div>
+              <div class="code-block">POST /api/scenes/sc1/apply
+Authorization: Bearer &lt;user-secret&gt;
+Body: {}</div>
+            </div>
+            <div>
+              <div class="body-label">Response</div>
+              <div class="code-block"><span class="c">// 200 OK</span>
+{ <span class="k">"ok"</span>: <span class="n">true</span>, <span class="k">"sceneId"</span>: <span class="s">"sc1"</span> }
+
+<span class="c">// 404</span>
+{ <span class="k">"error"</span>: <span class="s">"scene_not_found"</span> }</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- ══════════════════════════════════════ -->
@@ -1588,6 +1601,7 @@ Authorization: Bearer &lt;user-secret&gt;
         </div>
       </div>
 
+      <!-- START EFFECT -->
       <div class="api-card" id="card-ef-start">
         <div class="api-header" onclick="toggleCard('card-ef-start')">
           <span class="method-badge POST">POST</span>
@@ -1615,6 +1629,7 @@ Body: {}</div>
         </div>
       </div>
 
+      <!-- STOP EFFECT -->
       <div class="api-card" id="card-ef-stop">
         <div class="api-header" onclick="toggleCard('card-ef-stop')">
           <span class="method-badge POST">POST</span>
@@ -1673,78 +1688,67 @@ Body: {}</div>
         <span>All named parameter endpoints (dimmer, red, green, cct, strobe…) are removed. The app owns the channel map for each model and converts every UI interaction into raw DMX channel values before sending. The controller only receives channel numbers and 0–255 values.</span>
       </div>
 
-      <!-- RAW DEVICE -->
-      <div class="api-card" id="card-ctrl-raw-dev">
-        <div class="api-header" onclick="toggleCard('card-ctrl-raw-dev')">
+      <!-- BULK DEVICE CONTROL -->
+      <div class="api-card" id="card-ctrl-bulk">
+        <div class="api-header" onclick="toggleCard('card-ctrl-bulk')">
           <span class="method-badge POST">POST</span>
-          <span class="api-endpoint">/api/control/device/<span class="path-param">{id}</span>/raw</span>
-          <span class="api-desc">Send raw DMX channel values to one fixture</span>
+          <span class="api-endpoint">/api/control</span>
+          <span class="api-desc">Bulk control via device ID and relative channels</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
-          <div class="body-note">Send only the channels that changed. Controller merges with current state. All values are 0–255. Channel numbering is relative to the fixture's DMX start address (ch 1 = start address, ch 2 = start+1, etc.).</div>
+          <div class="body-note">Send an array of device control objects. Channel numbering is relative to the fixture's DMX start address.</div>
           <div class="body-cols">
             <div>
               <div class="body-label">Request payload</div>
-              <div class="code-block">{
-  <span class="k">"channels"</span>: [
-    { <span class="k">"channel"</span>: <span class="n">1</span>, <span class="k">"value"</span>: <span class="n">200</span> }, <span class="c">// Master dimmer</span>
-    { <span class="k">"channel"</span>: <span class="n">2</span>, <span class="k">"value"</span>: <span class="n">180</span> }, <span class="c">// CCT</span>
-    { <span class="k">"channel"</span>: <span class="n">3</span>, <span class="k">"value"</span>: <span class="n">0</span> },   <span class="c">// Color correction</span>
-    { <span class="k">"channel"</span>: <span class="n">4</span>, <span class="k">"value"</span>: <span class="n">255</span> }  <span class="c">// Red</span>
-  ]
-}
-<span class="c">// Array of channel objects
-// channel: 1–512, value: 0–255</span></div>
+              <div class="code-block">[
+  {
+    <span class="k">"deviceId"</span>: <span class="s">"d1"</span>,
+    <span class="k">"channels"</span>: [
+      { <span class="k">"channel"</span>: <span class="n">1</span>, <span class="k">"value"</span>: <span class="n">255</span> },
+      { <span class="k">"channel"</span>: <span class="n">4</span>, <span class="k">"value"</span>: <span class="n">200</span> }
+    ]
+  }
+]</div>
             </div>
             <div>
               <div class="body-label">Responses</div>
               <div class="code-block"><span class="c">// 200 OK</span>
 { <span class="k">"ok"</span>: <span class="n">true</span>,
-  <span class="k">"appliedAt"</span>: <span class="s">"2026-05-10T10:30:00Z"</span> }
-
-<span class="c">// 404</span>
-{ <span class="k">"error"</span>: <span class="s">"device_not_found"</span> }
-
-<span class="c">// 400 Value out of range</span>
-{ <span class="k">"error"</span>: <span class="s">"value_out_of_range"</span>,
-  <span class="k">"channel"</span>: <span class="s">"4"</span>,
-  <span class="k">"value"</span>: <span class="n">300</span>,
-  <span class="k">"max"</span>: <span class="n">255</span> }</div>
+  <span class="k">"appliedAt"</span>: <span class="s">"2026-05-12T10:30:00Z"</span> }</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- RAW GROUP -->
-      <div class="api-card" id="card-ctrl-raw-grp">
-        <div class="api-header" onclick="toggleCard('card-ctrl-raw-grp')">
+      <!-- RAW CHANNEL CONTROL -->
+      <div class="api-card" id="card-ctrl-raw">
+        <div class="api-header" onclick="toggleCard('card-ctrl-raw')">
           <span class="method-badge POST">POST</span>
-          <span class="api-endpoint">/api/control/group/<span class="path-param">{id}</span>/raw</span>
-          <span class="api-desc">Broadcast raw channel values to all fixtures in group</span>
+          <span class="api-endpoint">/api/control/raw</span>
+          <span class="api-desc">Direct global channel mapping (Key-Value)</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
-          <div class="body-note">Controller applies each channel value only to fixtures that have that channel (i.e. whose channelCount ≥ the channel number). Mismatched channels are silently skipped per fixture — no error.</div>
+          <div class="body-note">Send a JSON object where keys are <strong>global DMX addresses (1–512)</strong> and values are 0–255. No device IDs needed.</div>
           <div class="body-cols">
             <div>
               <div class="body-label">Request payload</div>
               <div class="code-block">{
-  <span class="k">"channels"</span>: [
-    { <span class="k">"channel"</span>: <span class="n">1</span>, <span class="k">"value"</span>: <span class="n">150</span> },
-    { <span class="k">"channel"</span>: <span class="n">2</span>, <span class="k">"value"</span>: <span class="n">0</span> },
-    { <span class="k">"channel"</span>: <span class="n">3</span>, <span class="k">"value"</span>: <span class="n">255</span> }
-  ]
+  <span class="k">"10"</span>: <span class="n">200</span>,
+  <span class="k">"11"</span>: <span class="n">112</span>,
+  <span class="k">"20"</span>: <span class="n">120</span>,
+  <span class="k">"21"</span>: <span class="n">230</span>
 }</div>
             </div>
             <div>
               <div class="body-label">Responses</div>
               <div class="code-block"><span class="c">// 200 OK</span>
 { <span class="k">"ok"</span>: <span class="n">true</span>,
-  <span class="k">"appliedToDevices"</span>: [<span class="s">"d1"</span>,<span class="s">"d2"</span>,<span class="s">"d3"</span>] }
+  <span class="k">"appliedAt"</span>: <span class="s">"2026-05-12T10:30:05Z"</span> }
 
-<span class="c">// 404</span>
-{ <span class="k">"error"</span>: <span class="s">"group_not_found"</span> }</div>
+<span class="c">// 400 Bad format</span>
+{ <span class="k">"error"</span>: <span class="s">"invalid_raw_mapping"</span> }</div>
             </div>
           </div>
         </div>

@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Canara Lighting — Controller API Reference</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0d0f14;
-    --surface: #141720;
-    --surface2: #1c2030;
-    --surface3: #232840;
-    --border: #2a3050;
-    --border2: #3a4570;
+    --bg: #090b10;
+    --surface: #10141d;
+    --surface2: #161c28;
+    --surface3: #1d2535;
+    --border: rgba(255,255,255,0.06);
+    --border2: rgba(255,255,255,0.12);
     --accent: #4f7cff;
     --accent2: #7c5cfc;
     --teal: #2dd4a0;
@@ -20,12 +20,12 @@
     --coral: #ff6b5b;
     --purple: #9b7cfc;
     --green: #4ade80;
-    --text: #e8ecf8;
-    --text2: #8a94b8;
-    --text3: #4a5480;
+    --text: #f0f2f8;
+    --text2: #a1a9c3;
+    --text3: #5c678a;
     --mono: 'JetBrains Mono', monospace;
-    --sans: 'Syne', sans-serif;
-    --radius: 10px;
+    --sans: 'Outfit', sans-serif;
+    --radius: 12px;
     --get: #2dd4a0;
     --get-bg: rgba(45,212,160,0.1);
     --post: #4f7cff;
@@ -51,11 +51,11 @@
 
   /* ── SIDEBAR ── */
   .sidebar {
-    width: 240px;
-    min-width: 240px;
-    background: var(--surface);
+    width: 260px;
+    min-width: 260px;
+    background: var(--bg);
     border-right: 1px solid var(--border);
-    padding: 24px 0;
+    padding: 32px 0;
     position: sticky;
     top: 0;
     height: 100vh;
@@ -90,17 +90,22 @@
   .nav-item {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 7px 20px;
-    font-size: 13px;
+    gap: 12px;
+    padding: 10px 24px;
+    font-size: 14px;
     color: var(--text2);
     cursor: pointer;
     text-decoration: none;
-    transition: all .15s;
-    border-left: 2px solid transparent;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
   }
-  .nav-item:hover { color: var(--text); background: var(--surface2); }
-  .nav-item.active { color: var(--accent); border-left-color: var(--accent); background: rgba(79,124,255,0.07); }
+  .nav-item:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+  .nav-item.active { 
+    color: var(--accent); 
+    border-left-color: var(--accent); 
+    background: rgba(79,124,255,0.08);
+    font-weight: 500;
+  }
   .nav-dot {
     width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
   }
@@ -148,19 +153,19 @@
   .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--teal); border-radius: 50%; animation: pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
   .hero h1 {
-    font-size: 32px;
-    font-weight: 800;
-    letter-spacing: -1px;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
     color: var(--text);
     line-height: 1.1;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
   .hero h1 span { color: var(--accent); }
   .hero-sub {
     font-size: 14px;
     color: var(--text2);
-    margin-bottom: 24px;
-    font-family: var(--mono);
+    margin-bottom: 32px;
+    opacity: 0.8;
   }
   .hero-meta {
     display: flex;
@@ -203,16 +208,18 @@
     border-bottom: 1px solid var(--border);
   }
   .section-num {
-    width: 28px; height: 28px;
-    background: var(--accent);
-    color: #fff;
+    width: 32px; height: 32px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--accent);
     border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 700;
+    font-size: 13px; font-weight: 700;
     flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   }
-  .section-title { font-size: 18px; font-weight: 700; color: var(--text); }
-  .section-desc { font-size: 12px; color: var(--text3); font-family: var(--mono); margin-left: auto; }
+  .section-title { font-size: 20px; font-weight: 600; color: var(--text); letter-spacing: -0.2px; }
+  .section-desc { font-size: 12px; color: var(--text3); font-family: var(--mono); margin-left: auto; opacity: 0.8; }
 
   /* ── FLOW DIAGRAMS ── */
   .flow-grid {
@@ -377,18 +384,22 @@
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    margin-bottom: 6px;
+    margin-bottom: 12px;
     overflow: hidden;
-    transition: border-color .2s;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  .api-card:hover { border-color: var(--border2); }
-  .api-card.open { border-color: var(--border2); }
+  .api-card:hover { 
+    border-color: var(--border2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  }
+  .api-card.open { border-color: var(--accent); background: #131926; }
 
   .api-header {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
+    gap: 16px;
+    padding: 14px 20px;
     cursor: pointer;
     user-select: none;
   }
@@ -396,10 +407,10 @@
     font-family: var(--mono);
     font-size: 10px;
     font-weight: 700;
-    padding: 3px 9px;
-    border-radius: 5px;
-    letter-spacing: .8px;
-    min-width: 56px;
+    padding: 3px 0;
+    width: 60px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
     text-align: center;
     flex-shrink: 0;
   }
@@ -416,9 +427,10 @@
   }
   .api-endpoint .path-param { color: var(--amber); }
   .api-desc {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--text3);
-    margin-right: 8px;
+    margin-right: 4px;
+    opacity: 0.7;
   }
   .api-chevron {
     color: var(--text3);
@@ -427,6 +439,26 @@
     flex-shrink: 0;
   }
   .api-card.open .api-chevron { transform: rotate(90deg); color: var(--text2); }
+
+  .auth-badge {
+    margin-left: 8px;
+    margin-right: 4px;
+    font-size: 9px;
+    font-weight: 700;
+    color: #ff9800;
+    background: rgba(255,152,0,0.1);
+    padding: 2px 7px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border: 1px solid rgba(255,152,0,0.2);
+    font-family: var(--mono);
+    pointer-events: none;
+  }
+  .auth-badge span.icon { font-size: 11px; margin-bottom: 1px; }
 
   .api-body {
     display: none;
@@ -499,29 +531,41 @@
 
   /* ── TOP NAV ── */
   .topbar {
-    background: var(--surface);
+    background: rgba(9, 11, 16, 0.85);
+    backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     padding: 0 48px;
     display: flex;
     align-items: center;
-    gap: 24px;
-    height: 44px;
+    gap: 32px;
+    height: 52px;
     position: sticky;
     top: 0;
-    z-index: 50;
+    z-index: 100;
   }
-  .topbar-tabs { display: flex; gap: 4px; }
+  .topbar-tabs { display: flex; gap: 24px; height: 100%; }
   .topbar-tab {
-    font-size: 12px;
-    padding: 6px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    color: var(--text3);
-    transition: all .15s;
+    font-size: 13px;
     font-weight: 500;
+    color: var(--text3);
+    cursor: pointer;
+    transition: all 0.2s;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0 4px;
   }
-  .topbar-tab:hover { color: var(--text2); background: var(--surface2); }
-  .topbar-tab.active { color: var(--accent); background: rgba(79,124,255,0.1); }
+  .topbar-tab:hover { color: var(--text2); }
+  .topbar-tab.active { color: var(--accent); }
+  .topbar-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 2px 2px 0 0;
+  }
 
   /* ── SCROLLBAR ── */
   ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -552,11 +596,11 @@
   <a class="nav-item" href="#s-discovery">
     <span class="nav-dot" style="background:#2dd4a0"></span>Discovery
   </a>
-  <a class="nav-item" href="#s-rdm">
-    <span class="nav-dot" style="background:#ff6b5b"></span>RDM
-  </a>
   <a class="nav-item" href="#s-network">
     <span class="nav-dot" style="background:#4f7cff"></span>Network & System
+  </a>
+  <a class="nav-item" href="#s-rdm">
+    <span class="nav-dot" style="background:#ff6b5b"></span>RDM
   </a>
   <a class="nav-item" href="#s-config">
     <span class="nav-dot" style="background:#f5a623"></span>Configuration
@@ -596,17 +640,15 @@
   <div class="hero">
     <div class="hero-badge">WiFi DMX Controller</div>
     <h1>Canara Lighting<br><span>API Reference</span></h1>
-    <div class="hero-sub">WiFi DMX Controller — Complete endpoint specification</div>
+    <div class="hero-sub">WiFi DMX Controller</div>
     <div class="hero-meta">
       <div class="hero-meta-item">Prepared by <span>Exelon Circuits Pvt. Ltd.</span></div>
       <div class="hero-meta-item">Version <span>2.0</span></div>
       <div class="hero-meta-item">Date <span>May 2026</span></div>
-      <div class="hero-meta-item">Endpoints <span>29</span></div>
-      <div class="hero-meta-item">Fixtures <span>28 models</span></div>
+      <div class="hero-meta-item">Endpoints <span>33</span></div>
+
     </div>
-    <div class="base-url-bar">
-      <strong>BASE URL</strong> http://&lt;controller-ip&gt;/api &nbsp;·&nbsp; port 80 (configurable) &nbsp;·&nbsp; Content-Type: application/json
-    </div>
+
   </div>
 
   <!-- CONTENT -->
@@ -617,7 +659,7 @@
       <div class="section-header">
         <div class="section-num" style="background:var(--accent2)">F</div>
         <div class="section-title">Bluetooth Provisioning Flow</div>
-        <div class="section-desc">First-time setup only · WiFi flow removed</div>
+
       </div>
 
       <div class="api-note">
@@ -722,12 +764,12 @@
       <div class="section-header">
         <div class="section-num">1</div>
         <div class="section-title">Discovery</div>
-        <div class="section-desc">Two ping endpoints · One unauthenticated, one authenticated</div>
+
       </div>
 
       <div class="api-note">
         <span class="icon">&#9432;</span>
-        <span>All endpoints after auth require header: <code>Authorization: Bearer &lt;user-secret&gt;</code>. The secret entered during provisioning (separate from WiFi password) serves as the permanent authentication key.</span>
+        <span>Most endpoints require the <code>Authorization: Bearer &lt;user-secret&gt;</code> header. Look for the <span class="auth-badge" style="margin:0;display:inline-flex;position:relative;top:-1px"><span class="icon">🔒</span>Auth</span> badge on individual cards. The User Secret is the permanent key assigned during BLE provisioning.</span>
       </div>
 
       <!-- PING (unauthenticated) -->
@@ -769,6 +811,7 @@
           <span class="method-badge GET">GET</span>
           <span class="api-endpoint">/api/ping/details</span>
           <span class="api-desc">Authenticated ping — full status including WiFi details</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
@@ -804,139 +847,13 @@ Authorization: Bearer &lt;user-secret&gt;</div>
 </div>
 
     <!-- ══════════════════════════════════════ -->
-    <!-- SECTION 2: RDM                        -->
-    <!-- ══════════════════════════════════════ -->
-    <div class="section" id="s-rdm">
-      <div class="section-header">
-        <div class="section-num">2</div>
-        <div class="section-title">RDM — Remote Device Management</div>
-        <div class="section-desc">Requires hardware bidirectional DMX · Mfr ID: 06AEh</div>
-      </div>
-
-      <div class="api-card" id="card-rdm-disc">
-        <div class="api-header" onclick="toggleCard('card-rdm-disc')">
-          <span class="method-badge GET">GET</span>
-          <span class="api-endpoint">/api/rdm/discover</span>
-          <span class="api-desc">Scan DMX line for RDM-capable fixtures</span>
-          <span class="api-chevron">▶</span>
-        </div>
-        <div class="api-body">
-          <div class="body-cols">
-            <div>
-              <div class="body-label">Request</div>
-              <div class="code-block">GET /api/rdm/discover
-Authorization: Bearer &lt;user-secret&gt;</div>
-            </div>
-            <div>
-              <div class="body-label">Responses</div>
-              <div class="code-block"><span class="c">// 200 OK</span>
-{
-  <span class="k">"discovered"</span>: [
-    { <span class="k">"uid"</span>: <span class="s">"06AE:00000001"</span>,
-      <span class="k">"manufacturerId"</span>: <span class="s">"06AEh"</span>,
-      <span class="k">"manufacturerName"</span>: <span class="s">"Canara Lightings"</span>,
-      <span class="k">"dmxAddress"</span>: <span class="n">1</span>,
-      <span class="k">"label"</span>: <span class="s">"Spot 1"</span> }
-  ],
-  <span class="k">"scannedAt"</span>: <span class="s">"2026-05-10T10:30:00Z"</span>
-}
-
-<span class="c">// 503 Not supported</span>
-{ <span class="k">"error"</span>: <span class="s">"rdm_not_supported"</span> }</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="api-card" id="card-rdm-info">
-        <div class="api-header" onclick="toggleCard('card-rdm-info')">
-          <span class="method-badge GET">GET</span>
-          <span class="api-endpoint">/api/rdm/devices/<span class="path-param">{uid}</span></span>
-          <span class="api-desc">Get full info for one RDM fixture</span>
-          <span class="api-chevron">▶</span>
-        </div>
-        <div class="api-body">
-          <div class="code-block"><span class="c">// 200 OK</span>
-{
-  <span class="k">"uid"</span>: <span class="s">"06AE:00000001"</span>,
-  <span class="k">"manufacturerId"</span>: <span class="s">"06AEh"</span>,
-  <span class="k">"manufacturerName"</span>: <span class="s">"Canara Lightings"</span>,
-  <span class="k">"modelId"</span>: <span class="s">"m26"</span>,
-  <span class="k">"modelName"</span>: <span class="s">"Color Fresnel"</span>,
-  <span class="k">"dmxAddress"</span>: <span class="n">1</span>,
-  <span class="k">"dmxFootprint"</span>: <span class="n">8</span>,
-  <span class="k">"firmwareVersion"</span>: <span class="s">"1.4.2"</span>,
-  <span class="k">"label"</span>: <span class="s">"Spot 1"</span>
-}
-
-<span class="c">// 404</span>
-{ <span class="k">"error"</span>: <span class="s">"rdm_device_not_found"</span> }</div>
-        </div>
-      </div>
-
-      <div class="api-card" id="card-rdm-id">
-        <div class="api-header" onclick="toggleCard('card-rdm-id')">
-          <span class="method-badge POST">POST</span>
-          <span class="api-endpoint">/api/rdm/<span class="path-param">{uid}</span>/identify</span>
-          <span class="api-desc">Make fixture blink/flash for identification</span>
-          <span class="api-chevron">▶</span>
-        </div>
-        <div class="api-body">
-          <div class="body-cols">
-            <div>
-              <div class="body-label">Request payload</div>
-              <div class="code-block">{ <span class="k">"identify"</span>: <span class="n">true</span> }
-<span class="c">// false to stop identify mode</span></div>
-            </div>
-            <div>
-              <div class="body-label">Response</div>
-              <div class="code-block"><span class="c">// 200 OK</span>
-{ <span class="k">"ok"</span>: <span class="n">true</span>,
-  <span class="k">"uid"</span>: <span class="s">"06AE:00000001"</span>,
-  <span class="k">"identifying"</span>: <span class="n">true</span> }</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="api-card" id="card-rdm-addr">
-        <div class="api-header" onclick="toggleCard('card-rdm-addr')">
-          <span class="method-badge PUT">PUT</span>
-          <span class="api-endpoint">/api/rdm/<span class="path-param">{uid}</span>/address</span>
-          <span class="api-desc">Remotely change fixture DMX start address</span>
-          <span class="api-chevron">▶</span>
-        </div>
-        <div class="api-body">
-          <div class="body-cols">
-            <div>
-              <div class="body-label">Request payload</div>
-              <div class="code-block">{ <span class="k">"dmxAddress"</span>: <span class="n">25</span> }</div>
-            </div>
-            <div>
-              <div class="body-label">Responses</div>
-              <div class="code-block"><span class="c">// 200 OK</span>
-{ <span class="k">"ok"</span>: <span class="n">true</span>,
-  <span class="k">"uid"</span>: <span class="s">"06AE:00000001"</span>,
-  <span class="k">"newDmxAddress"</span>: <span class="n">25</span> }
-
-<span class="c">// 400 Out of range</span>
-{ <span class="k">"error"</span>: <span class="s">"address_out_of_range"</span>,
-  <span class="k">"max"</span>: <span class="n">512</span> }</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /rdm section -->
-
-    <!-- ══════════════════════════════════════ -->
-    <!-- SECTION 3: NETWORK & SYSTEM           -->
+    <!-- SECTION 2: NETWORK & SYSTEM           -->
     <!-- ══════════════════════════════════════ -->
     <div class="section" id="s-network">
       <div class="section-header">
-        <div class="section-num">3</div>
+        <div class="section-num">2</div>
         <div class="section-title">Network & System</div>
-        <div class="section-desc">Update WiFi · Network reset · Factory reset</div>
+
       </div>
 
       <!-- UPDATE WIFI -->
@@ -948,7 +865,7 @@ Authorization: Bearer &lt;user-secret&gt;</div>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
-          <div class="body-note">Used when the venue WiFi changes. Requires the <strong>User Secret</strong> in the <code>Authorization</code> header. Updates SSID/Password only; the <strong>User Secret cannot be changed</strong> via this API. The controller reconnects immediately, dropping the current session.</div>
+          <div class="body-note">Used when the venue WiFi changes. Updates SSID/Password only; the <strong>User Secret cannot be changed</strong> via this API. The controller reconnects immediately, dropping the current session.</div>
           <div class="body-cols">
             <div>
               <div class="body-label">Request payload</div>
@@ -985,6 +902,7 @@ Authorization: Bearer &lt;user-secret&gt;</div>
           <span class="method-badge POST">POST</span>
           <span class="api-endpoint">/api/network/reset</span>
           <span class="api-desc">Clear WiFi credentials — triggers BLE provisioning mode</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
@@ -1015,6 +933,7 @@ Authorization: Bearer &lt;user-secret&gt;
           <span class="method-badge POST">POST</span>
           <span class="api-endpoint">/api/system/factory-reset</span>
           <span class="api-desc">Full factory reset — wipes everything</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
@@ -1041,19 +960,142 @@ Authorization: Bearer &lt;user-secret&gt;
     </div>
 
     <!-- ══════════════════════════════════════ -->
+    <!-- SECTION 3: RDM                        -->
+    <!-- ══════════════════════════════════════ -->
+    <div class="section" id="s-rdm">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <div class="section-title">RDM — Remote Device Management</div>
+
+      </div>
+
+      <div class="api-card" id="card-rdm-disc">
+        <div class="api-header" onclick="toggleCard('card-rdm-disc')">
+          <span class="method-badge GET">GET</span>
+          <span class="api-endpoint">/api/rdm/discover</span>
+          <span class="api-desc">Scan DMX line for RDM-capable fixtures</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
+          <span class="api-chevron">▶</span>
+        </div>
+        <div class="api-body">
+          <div class="body-cols">
+            <div>
+              <div class="body-label">Request</div>
+              <div class="code-block">GET /api/rdm/discover
+Authorization: Bearer &lt;user-secret&gt;</div>
+            </div>
+            <div>
+              <div class="body-label">Responses</div>
+              <div class="code-block"><span class="c">// 200 OK</span>
+[
+  { <span class="k">"uid"</span>: <span class="s">"06AE:00000001"</span>,
+    <span class="k">"manufacturerId"</span>: <span class="s">"06AEh"</span>,
+    <span class="k">"manufacturerName"</span>: <span class="s">"Canara Lightings"</span>,
+    <span class="k">"dmxAddress"</span>: <span class="n">1</span>,
+    <span class="k">"label"</span>: <span class="s">"Spot 1"</span> }
+]
+
+<span class="c">// 503 Not supported</span>
+{ <span class="k">"error"</span>: <span class="s">"rdm_not_supported"</span> }</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="api-card" id="card-rdm-info">
+        <div class="api-header" onclick="toggleCard('card-rdm-info')">
+          <span class="method-badge GET">GET</span>
+          <span class="api-endpoint">/api/rdm/devices/<span class="path-param">{uid}</span></span>
+          <span class="api-desc">Get full info for one RDM fixture</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
+          <span class="api-chevron">▶</span>
+        </div>
+        <div class="api-body">
+          <div class="code-block"><span class="c">// 200 OK</span>
+{
+  <span class="k">"uid"</span>: <span class="s">"06AE:00000001"</span>,
+  <span class="k">"manufacturerId"</span>: <span class="s">"06AEh"</span>,
+  <span class="k">"manufacturerName"</span>: <span class="s">"Canara Lightings"</span>,
+  <span class="k">"modelId"</span>: <span class="s">"m26"</span>,
+  <span class="k">"modelName"</span>: <span class="s">"Color Fresnel"</span>,
+  <span class="k">"dmxAddress"</span>: <span class="n">1</span>,
+  <span class="k">"dmxFootprint"</span>: <span class="n">8</span>,
+  <span class="k">"firmwareVersion"</span>: <span class="s">"1.4.2"</span>,
+  <span class="k">"label"</span>: <span class="s">"Spot 1"</span>
+}
+
+<span class="c">// 404</span>
+{ <span class="k">"error"</span>: <span class="s">"rdm_device_not_found"</span> }</div>
+        </div>
+      </div>
+
+      <div class="api-card" id="card-rdm-id">
+        <div class="api-header" onclick="toggleCard('card-rdm-id')">
+          <span class="method-badge POST">POST</span>
+          <span class="api-endpoint">/api/rdm/<span class="path-param">{uid}</span>/identify</span>
+          <span class="api-desc">Make fixture blink/flash for identification</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
+          <span class="api-chevron">▶</span>
+        </div>
+        <div class="api-body">
+          <div class="body-cols">
+            <div>
+              <div class="body-label">Request payload</div>
+              <div class="code-block">{ <span class="k">"identify"</span>: <span class="n">true</span> }
+<span class="c">// false to stop identify mode</span></div>
+            </div>
+            <div>
+              <div class="body-label">Response</div>
+              <div class="code-block"><span class="c">// 200 OK</span>
+{ <span class="k">"ok"</span>: <span class="n">true</span>,
+  <span class="k">"uid"</span>: <span class="s">"06AE:00000001"</span>,
+  <span class="k">"identifying"</span>: <span class="n">true</span> }</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="api-card" id="card-rdm-addr">
+        <div class="api-header" onclick="toggleCard('card-rdm-addr')">
+          <span class="method-badge PUT">PUT</span>
+          <span class="api-endpoint">/api/rdm/<span class="path-param">{uid}</span>/address</span>
+          <span class="api-desc">Remotely change fixture DMX start address</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
+          <span class="api-chevron">▶</span>
+        </div>
+        <div class="api-body">
+          <div class="body-cols">
+            <div>
+              <div class="body-label">Request payload</div>
+              <div class="code-block">{ <span class="k">"dmxAddress"</span>: <span class="n">25</span> }</div>
+            </div>
+            <div>
+              <div class="body-label">Responses</div>
+              <div class="code-block"><span class="c">// 200 OK</span>
+{ <span class="k">"ok"</span>: <span class="n">true</span>,
+  <span class="k">"uid"</span>: <span class="s">"06AE:00000001"</span>,
+  <span class="k">"newDmxAddress"</span>: <span class="n">25</span> }
+
+<span class="c">// 400 Out of range</span>
+{ <span class="k">"error"</span>: <span class="s">"address_out_of_range"</span>,
+  <span class="k">"max"</span>: <span class="n">512</span> }</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════ -->
     <!-- SECTION 4: CONFIGURATION              -->
     <!-- ══════════════════════════════════════ -->
     <div class="section" id="s-config">
       <div class="section-header">
         <div class="section-num">4</div>
         <div class="section-title">Configuration</div>
-        <div class="section-desc">Fetched once per session · Models live in app not controller</div>
+
       </div>
 
-      <div class="api-note">
-        <span class="icon">&#9432;</span>
-        <span>Fixture model definitions (channel count, channel labels, min/max values) are stored <strong>in the app</strong>, not fetched from the controller. The app assigns a <code>modelId</code> when adding a device and sends raw channel values for control. <code>GET /api/config</code> returns device list, groups, scenes, and effects only.</span>
-      </div>
+
 
       <!-- CONFIG -->
       <div class="api-card" id="card-config">
@@ -1061,6 +1103,7 @@ Authorization: Bearer &lt;user-secret&gt;
           <span class="method-badge GET">GET</span>
           <span class="api-endpoint">/api/config</span>
           <span class="api-desc">Full controller state — called once on every connect</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
@@ -1131,7 +1174,7 @@ Authorization: Bearer &lt;user-secret&gt;
       <div class="section-header">
         <div class="section-num">5</div>
         <div class="section-title">Device (Fixture) Management</div>
-        <div class="section-desc">App assigns modelId · Controller stores address + channel count only</div>
+
       </div>
 
       <div class="api-card" id="card-dev-list">
@@ -1139,14 +1182,15 @@ Authorization: Bearer &lt;user-secret&gt;
           <span class="method-badge GET">GET</span>
           <span class="api-endpoint">/api/devices</span>
           <span class="api-desc">List all configured fixtures</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
           <div class="code-block"><span class="c">// 200 OK</span>
-{ <span class="k">"devices"</span>: [
+[
   { <span class="k">"id"</span>: <span class="s">"d1"</span>, <span class="k">"name"</span>: <span class="s">"Spot 1"</span>, <span class="k">"uid"</span>: <span class="s">"06AE:00000001"</span>, <span class="k">"modelId"</span>: <span class="s">"m26"</span>, <span class="k">"dmxAddress"</span>: <span class="n">1</span>, <span class="k">"channelCount"</span>: <span class="n">8</span> },
   { <span class="k">"id"</span>: <span class="s">"d2"</span>, <span class="k">"name"</span>: <span class="s">"Wash 1"</span>, <span class="k">"uid"</span>: <span class="n">null</span>, <span class="k">"modelId"</span>: <span class="s">"m12"</span>, <span class="k">"dmxAddress"</span>: <span class="n">9</span>, <span class="k">"channelCount"</span>: <span class="n">2</span> }
-] }</div>
+]</div>
         </div>
       </div>
 
@@ -1155,6 +1199,7 @@ Authorization: Bearer &lt;user-secret&gt;
           <span class="method-badge POST">POST</span>
           <span class="api-endpoint">/api/devices</span>
           <span class="api-desc">Add a new fixture</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
@@ -1192,6 +1237,7 @@ Authorization: Bearer &lt;user-secret&gt;
           <span class="method-badge PUT">PUT</span>
           <span class="api-endpoint">/api/devices/<span class="path-param">{id}</span></span>
           <span class="api-desc">Edit fixture name, address, model, or assignment</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
@@ -1229,6 +1275,7 @@ Authorization: Bearer &lt;user-secret&gt;
           <span class="method-badge DELETE">DELETE</span>
           <span class="api-endpoint">/api/devices/<span class="path-param">{id}</span></span>
           <span class="api-desc">Remove fixture from controller</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
@@ -1250,7 +1297,7 @@ Authorization: Bearer &lt;user-secret&gt;
       <div class="section-header">
         <div class="section-num">6</div>
         <div class="section-title">Group Management</div>
-        <div class="section-desc">Create clusters · Assign members, scene, or effect</div>
+
       </div>
 
       <div class="api-card" id="card-grp-list">
@@ -1258,16 +1305,17 @@ Authorization: Bearer &lt;user-secret&gt;
           <span class="method-badge GET">GET</span>
           <span class="api-endpoint">/api/groups</span>
           <span class="api-desc">List all groups</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
           <div class="code-block"><span class="c">// 200 OK</span>
-{ <span class="k">"groups"</span>: [
+[
   {
     <span class="k">"id"</span>: <span class="s">"g1"</span>, <span class="k">"name"</span>: <span class="s">"Stage Left"</span>,
     <span class="k">"deviceIds"</span>: [<span class="s">"d1"</span>, <span class="s">"d2"</span>]
   }
-] }</div>
+]</div>
         </div>
       </div>
 
@@ -1276,6 +1324,7 @@ Authorization: Bearer &lt;user-secret&gt;
           <span class="method-badge POST">POST</span>
           <span class="api-endpoint">/api/groups</span>
           <span class="api-desc">Create a group</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
@@ -1302,6 +1351,7 @@ Authorization: Bearer &lt;user-secret&gt;
           <span class="method-badge PUT">PUT</span>
           <span class="api-endpoint">/api/groups/<span class="path-param">{id}</span></span>
           <span class="api-desc">Edit group name, members, or assignment</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
@@ -1333,6 +1383,7 @@ Authorization: Bearer &lt;user-secret&gt;
           <span class="method-badge DELETE">DELETE</span>
           <span class="api-endpoint">/api/groups/<span class="path-param">{id}</span></span>
           <span class="api-desc">Delete a group</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
@@ -1352,7 +1403,7 @@ Authorization: Bearer &lt;user-secret&gt;
       <div class="section-header">
         <div class="section-num">7</div>
         <div class="section-title">Scene Management</div>
-        <div class="section-desc">Target-based snapshots · Supports both devices and groups</div>
+
       </div>
 
       <div class="api-card" id="card-sc-list">
@@ -1360,13 +1411,24 @@ Authorization: Bearer &lt;user-secret&gt;
           <span class="method-badge GET">GET</span>
           <span class="api-endpoint">/api/scenes</span>
           <span class="api-desc">List all scenes</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
           <div class="code-block"><span class="c">// 200 OK</span>
-{ <span class="k">"scenes"</span>: [
-  { <span class="k">"id"</span>: <span class="s">"sc1"</span>, <span class="k">"name"</span>: <span class="s">"Warm Welcome"</span>, <span class="k">"targetCount"</span>: <span class="n">2</span> }
-] }</div>
+[
+  {
+    <span class="k">"id"</span>: <span class="s">"sc1"</span>,
+    <span class="k">"name"</span>: <span class="s">"Warm Welcome"</span>,
+    <span class="k">"targets"</span>: [
+      {
+        <span class="k">"type"</span>: <span class="s">"device"</span>,
+        <span class="k">"id"</span>: <span class="s">"d1"</span>,
+        <span class="k">"values"</span>: { <span class="k">"dimmer"</span>: <span class="n">255</span>, <span class="k">"red"</span>: <span class="n">200</span> }
+      }
+    ]
+  }
+]</div>
         </div>
       </div>
 
@@ -1375,6 +1437,7 @@ Authorization: Bearer &lt;user-secret&gt;
           <span class="method-badge POST">POST</span>
           <span class="api-endpoint">/api/scenes</span>
           <span class="api-desc">Save scene — snapshot uses raw channel values</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
@@ -1419,6 +1482,7 @@ Authorization: Bearer &lt;user-secret&gt;
           <span class="method-badge PUT">PUT</span>
           <span class="api-endpoint">/api/scenes/<span class="path-param">{id}</span></span>
           <span class="api-desc">Update scene name or targets</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
@@ -1457,6 +1521,7 @@ Authorization: Bearer &lt;user-secret&gt;
           <span class="method-badge DELETE">DELETE</span>
           <span class="api-endpoint">/api/scenes/<span class="path-param">{id}</span></span>
           <span class="api-desc">Delete a scene</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
@@ -1474,6 +1539,7 @@ Authorization: Bearer &lt;user-secret&gt;
           <span class="method-badge POST">POST</span>
           <span class="api-endpoint">/api/scenes/<span class="path-param">{id}</span>/apply</span>
           <span class="api-desc">Recall and apply a saved scene snapshot</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
@@ -1504,27 +1570,32 @@ Body: {}</div>
       <div class="section-header">
         <div class="section-num">8</div>
         <div class="section-title">Effects Engine</div>
-        <div class="section-desc">Controller-global · No device/group in definition · App can disconnect</div>
+
       </div>
 
-      <div class="api-note">
-        <span class="icon">&#9432;</span>
-        <span>Effects have no <code>deviceIds</code> or <code>groupId</code> — devices are implicit via the scenes in each step. Once started, the controller runs the effect loop independently.</span>
-      </div>
+
 
       <div class="api-card" id="card-ef-list">
         <div class="api-header" onclick="toggleCard('card-ef-list')">
           <span class="method-badge GET">GET</span>
           <span class="api-endpoint">/api/effects</span>
           <span class="api-desc">List all effects</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
           <div class="code-block"><span class="c">// 200 OK</span>
-{ <span class="k">"effects"</span>: [
-  { <span class="k">"id"</span>: <span class="s">"ef1"</span>, <span class="k">"name"</span>: <span class="s">"Pulse"</span>,
-    <span class="k">"loop"</span>: <span class="n">true</span>, <span class="k">"stepCount"</span>: <span class="n">3</span>, <span class="k">"status"</span>: <span class="s">"running"</span> }
-] }</div>
+[
+  {
+    <span class="k">"id"</span>: <span class="s">"ef1"</span>,
+    <span class="k">"name"</span>: <span class="s">"Pulse"</span>,
+    <span class="k">"loop"</span>: <span class="n">true</span>,
+    <span class="k">"status"</span>: <span class="s">"running"</span>,
+    <span class="k">"steps"</span>: [
+      { <span class="k">"sceneId"</span>: <span class="s">"sc1"</span>, <span class="k">"duration"</span>: <span class="n">2000</span>, <span class="k">"fade"</span>: <span class="n">500</span> }
+    ]
+  }
+]</div>
         </div>
       </div>
 
@@ -1533,6 +1604,7 @@ Body: {}</div>
           <span class="method-badge POST">POST</span>
           <span class="api-endpoint">/api/effects</span>
           <span class="api-desc">Create effect — sequence of scenes, no device list</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
@@ -1573,6 +1645,7 @@ Body: {}</div>
           <span class="method-badge PUT">PUT</span>
           <span class="api-endpoint">/api/effects/<span class="path-param">{id}</span></span>
           <span class="api-desc">Update effect name, loop, or steps</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
@@ -1607,6 +1680,7 @@ Body: {}</div>
           <span class="method-badge POST">POST</span>
           <span class="api-endpoint">/api/effects/<span class="path-param">{id}</span>/start</span>
           <span class="api-desc">Start effect playback on controller</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
@@ -1635,6 +1709,7 @@ Body: {}</div>
           <span class="method-badge POST">POST</span>
           <span class="api-endpoint">/api/effects/<span class="path-param">{id}</span>/stop</span>
           <span class="api-desc">Stop effect playback</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
@@ -1661,6 +1736,7 @@ Body: {}</div>
           <span class="method-badge DELETE">DELETE</span>
           <span class="api-endpoint">/api/effects/<span class="path-param">{id}</span></span>
           <span class="api-desc">Delete an effect</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
@@ -1680,13 +1756,10 @@ Body: {}</div>
       <div class="section-header">
         <div class="section-num">9</div>
         <div class="section-title">Real-time DMX Control — Raw mode only</div>
-        <div class="section-desc">App converts all UI values → raw 0–255 before sending</div>
+
       </div>
 
-      <div class="api-note">
-        <span class="icon">&#9432;</span>
-        <span>All named parameter endpoints (dimmer, red, green, cct, strobe…) are removed. The app owns the channel map for each model and converts every UI interaction into raw DMX channel values before sending. The controller only receives channel numbers and 0–255 values.</span>
-      </div>
+
 
       <!-- BULK DEVICE CONTROL -->
       <div class="api-card" id="card-ctrl-bulk">
@@ -1694,6 +1767,7 @@ Body: {}</div>
           <span class="method-badge POST">POST</span>
           <span class="api-endpoint">/api/control</span>
           <span class="api-desc">Bulk control via device ID and relative channels</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
@@ -1727,6 +1801,7 @@ Body: {}</div>
           <span class="method-badge POST">POST</span>
           <span class="api-endpoint">/api/control/raw</span>
           <span class="api-desc">Direct global channel mapping (Key-Value)</span>
+          <span class="auth-badge"><span class="icon">🔒</span>Auth</span>
           <span class="api-chevron">▶</span>
         </div>
         <div class="api-body">
